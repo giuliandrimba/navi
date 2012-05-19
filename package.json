@@ -1,0 +1,46 @@
+{
+  "name": "navi",
+  "description": "page navigation library",
+  "version": "0.1.0",
+  "homepage": "https://github.com/giuliandrimba/navi",
+  "author": {
+    "name": "Giulian Drimba",
+    "email": "giuliandrimba@hotmail.com",
+    "url": "http://www.giuliandrimba.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/giuliandrimba/navi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/giuliandrimba/navi/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/giuliandrimba/navi/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "./index",
+  "engines": {
+    "node": "~0.6.15"
+  },
+  "dependencies": {
+    
+    },
+  "devDependencies": {
+    
+  },
+  "keywords": [],
+  "_npmUser": {
+    "name": "giuliandrimba",
+    "email": "giuliandrimba@hotmail.com"
+  },
+  "_id": "navi@0.1.0",
+  "optionalDependencies": {},
+  "_engineSupported": true,
+  "_npmVersion": "1.1.16",
+  "_nodeVersion": "v0.6.15",
+  "_defaultsLoaded": true,
+  "_from": "navi"
+}
