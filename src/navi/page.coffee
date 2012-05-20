@@ -9,9 +9,9 @@ class Page
 		@route = object.route
 		@object = object.page
 
-	in:(callback)=>
+	in:(params, callback)=>
 		@animating_in = true
-		@el = @object.render()
+		@el = @object.render(params)
 		$(@target).html @el
 		@object.in =>
 			if @removing == false

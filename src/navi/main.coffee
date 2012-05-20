@@ -12,11 +12,12 @@ class Main
 	constructor:->
 
 	@map:(hash,object,el_target)->
-		decorator = new navi.Page({route:hash,page:object,target:el_target})
-		routes.push(decorator)
+		navi_page = new navi.Page({route:hash,page:object,target:el_target, params:null})
+		routes.push(navi_page)
 
 		window.page "/#" + hash,(ctx)=>
-			@process_hash_change decorator.route
+			navi_page.params = ctx.params
+			@process_hash_change navi_page
 
 	@init:->
 		hash = window.location.hash.toString().substring(1)
@@ -31,17 +32,17 @@ class Main
 	@go:(page_name)->
 		window.page "/#" + page_name
 
-	@process_hash_change:(page_name)=>
+	@process_hash_change:(navi_page)=>
 		Main.events.trigger("route_change")
-		@change_page(page_name)
+		@change_page(navi_page)
 
-	@change_page:(page_name)->
-		@next_page = page_name
+	@change_page:(navi_page)->
+		@next_page = navi_page.route
 		if @current_page
 			@remove_current_page =>
-				@add_next_page()
+				@add_next_page(navi_page)
 		else
-			@add_next_page()
+			@add_next_page(navi_page)
 
 
 	@remove_current_page:(callback)->
@@ -52,10 +53,11 @@ class Main
 			if @current_page.animating_out is false
 				@current_page.out(callback)
 
-	@add_next_page:()->
+	@add_next_page:(navi_page)->
+		console.log navi_page.params
 		@current_page = @get_page @next_page
 		Main.events.trigger("page_change")
-		@current_page.in =>
+		@current_page.in navi_page.params , -> 
 
 	@get_page:(route)->
 		for e in routes
