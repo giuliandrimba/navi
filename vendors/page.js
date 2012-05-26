@@ -315,7 +315,7 @@
     return ~href.indexOf('://');
   }
 
-  /**
+  /** 
    * Expose `page`.
    */
 
