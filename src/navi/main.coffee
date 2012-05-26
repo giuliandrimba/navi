@@ -64,17 +64,21 @@ class Main
 			if(e.route == route)
 				return e
 
-exports.map = (hash,object,el_target)->
-	navi.Main.map(hash,object,el_target)
 
-exports.go = (page_name)->
-	navi.Main.go(page_name)
+if 'undefined' == typeof module
+	window.Navi = navi.Main
+else
+	exports.map = (hash,object,el_target)->
+		navi.Main.map(hash,object,el_target)
 
-exports.init = ->
-	navi.Main.init()
+	exports.go = (page_name)->
+		navi.Main.go(page_name)
 
-exports.bind = (event,callback)->
-	navi.Main.events.bind(event,callback)
+	exports.init = ->
+		navi.Main.init()
 
-exports.unbind = (event,callback)->
-	navi.Main.events.unbind(event,callback)
+	exports.bind = (event,callback)->
+		navi.Main.events.bind(event,callback)
+
+	exports.unbind = (event,callback)->
+		navi.Main.events.unbind(event,callback)
