@@ -12,5 +12,5 @@ class PubSub
     	e.callback() if e.event is event
 
   unbind:(event, callback)->
-  	for e, i in listeners
+    for e, i in listeners
     	listeners.slice(i,0) if e.event is event and e.callback() is callback()
