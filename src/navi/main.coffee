@@ -64,8 +64,11 @@ class Main
 			if(e.route == route)
 				return e
 
-
-if 'undefined' == typeof module
+if typeof define == 'function' && define.amd
+	define( =>
+		return navi.Main
+	)
+else if 'undefined' == typeof module
 	window.Navi = navi.Main
 else
 	exports.map = (hash,object,el_target)->
