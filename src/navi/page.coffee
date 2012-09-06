@@ -9,19 +9,20 @@ class Page
 		@route = object.route
 		@object = object.page
 
-	in:(params, callback)=>
+	intro:(params, callback)=>
+
 		@animating_in = true
 		@el = @object.render(params)
 		$(@target).html @el
-		@object.in =>
+		@object.intro =>
 			if @removing == false
 				@animating_in = false
 				callback()
 
-	out:(callback)=>
+	outro:(callback)=>
 		@animating_out = true
 		@removing = true
 		@animating_in = false
-		@object.out =>
+		@object.outro =>
 			@animating_out = false
 			callback()

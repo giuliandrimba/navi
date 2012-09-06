@@ -1,7 +1,7 @@
 # => SRC FOLDER
 toast 'src'
 	# => VENDORS (optional)
-	vendors: ['vendors/page.js']
+	vendors: ['vendors/jquery.hashchange.js','vendors/page.js']
 
 	# => OPTIONS (optional, default values listed)
 	# bare: false
