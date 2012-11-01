@@ -7,9 +7,9 @@ class PubSub
   bind:(event,callback)->
     listeners.push({event:event,callback:callback})
 
-  trigger:(event)->
+  trigger:(event, params)->
     for e in listeners
-    	e.callback() if e.event is event
+    	e.callback(params) if e.event is event
 
   unbind:(event, callback)->
     for e, i in listeners

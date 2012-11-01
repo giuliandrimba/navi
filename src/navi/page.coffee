@@ -15,9 +15,9 @@ class Page
 		@el = @object.render(params)
 		$(@target).html @el
 		@object.intro =>
+			callback()
 			if @removing == false
 				@animating_in = false
-				callback()
 
 	outro:(callback)=>
 		@animating_out = true

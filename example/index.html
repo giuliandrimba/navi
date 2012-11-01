@@ -1,0 +1,37 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<title>Test</title>
+	<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="/navi-example/navi.js"></script>
+	<script type="text/javascript" src="/navi-example/home_.js"></script>
+	<script type="text/javascript" src="/navi-example/work_.js"></script>
+	<script type="text/javascript" src="/navi-example/_workdetail.js"></script>
+
+	<script type="text/javascript">
+
+		$(document).ready(function()
+		{
+			Navi.map("home",new Home,$("#content"));
+			Navi.map("work/:id/detalhe",new Work,$("#content"));
+			Navi.map("work/:id/detalhe/:id",new WorkDetail,$("#content"));
+			Navi.map("work",new Work,$("#content"));
+			Navi.init();
+		})
+
+	</script>
+
+</head>
+<body>
+
+	<a href="javascript:window.page('home')">Home</a>
+	<a href="javascript:window.page('work/1/detalhe/12')">Work</a>
+
+	<div id="content"></div>
+
+</body>
+</html>

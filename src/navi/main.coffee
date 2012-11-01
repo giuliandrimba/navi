@@ -9,6 +9,7 @@ class Main
 
 	current_page = null
 	next_page = null
+	locked : false
 
 	constructor:->
 		
@@ -17,26 +18,32 @@ class Main
 		navi_page = new navi.Page({route:hash,page:object,target:el_target, params:null})
 		routes.push(navi_page)
 
-		window.page hash,(ctx)=>
+		page_api = window.page hash,(ctx)=>
 			navi_page.params = ctx.params
 			@process_hash_change navi_page
 
-	@init:->
-		hash = window.location.hash.toString().substring(1)
+		navi_page.regexp = page_api.format_hash navi_page.route
 
-		window.page("/#"+hash)
+	@init:()=>
+		hash = window.location.hash.toString().substring(2)
+		if @has_valid_hash(hash)
+			window.page(hash).init()
+		else
+			window.page routes[0].route
 
 
 	@has_valid_hash:->
-		hash = window.location.hash.toString().substring(1)
+		hash = window.location.hash.toString().substring(2)
 		return true if @get_page(hash)
 		return false
 
 	@go:(page_name)->
-		window.page page_name
+
+		if(!@locked)
+			window.page page_name
 
 	@process_hash_change:(navi_page)=>
-		Main.events.trigger("route_change")
+		Main.events.trigger("route_change",{page:navi_page.route})
 		@change_page(navi_page)
 
 	@change_page:(navi_page)->
@@ -57,23 +64,30 @@ class Main
 				@current_page.outro(callback)
 
 	@add_next_page:(navi_page)->
-		@current_page = @get_page @next_page
-		Main.events.trigger("page_change")
-		@current_page.intro navi_page.params , -> 
+		@current_page = @get_page(@next_page)
+		@current_page.intro navi_page.params , => 
+			Main.events.trigger("page_change")
+
 
 	@get_page:(route)->
+		console.log "get page"
+		obj = null
 		for e in routes
-			if(e.route == route)
-				return e
+			if(route.match(e.regexp))
+				for rxp in route.match(e.regexp)
+					if rxp is route
+						obj = e
+		return obj
 
 if typeof define == 'function' && define.amd
 	define( =>
-		if !history.pushState
-			window.page = new navi.HashNav()
+		window.page = new navi.HashNav()
 
 		return navi.Main
 	)
 else if 'undefined' == typeof module
+	window.page = new navi.HashNav()
+			
 	window.Navi = navi.Main
 else
 	exports.map = (hash,object,el_target)->
