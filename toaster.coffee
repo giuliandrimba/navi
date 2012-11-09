@@ -11,5 +11,6 @@ toast 'src'
 
 	# => HTTPFOLDER (optional), RELEASE / DEBUG (required)
 	httpfolder: ''
-	release: 'lib/navi.js'
-	debug: 'lib/navi-debug.js'
+	release: '../../../workspace/espn/espn-nfl2012/public/javascripts/vendors/navi//navi.js'
+	debug: '../../../workspace/espn/espn-nfl2012/public/javascripts/vendors/navi//navi.js'
+	# debug: 'lib/navi-debug.js'

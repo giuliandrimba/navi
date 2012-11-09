@@ -14,8 +14,10 @@ class Main
 	constructor:->
 		
 
-	@map:(hash,object,el_target)->
-		navi_page = new navi.Page({route:hash,page:object,target:el_target, params:null})
+	@map:(hash,object,el_target,options)->
+		modal = false
+		modal = true if options?.modal
+		navi_page = new navi.Page({route:hash,page:object,target:el_target, params:null, modal:modal})
 		routes.push(navi_page)
 
 		page_api = window.page hash,(ctx)=>
@@ -39,6 +41,12 @@ class Main
 
 	@go:(page_name)->
 
+		page = @get_page(page_name)
+
+		if page.modal and !@locked
+			@process_hash_change page
+			return
+
 		if(!@locked)
 			window.page page_name
 
@@ -49,8 +57,12 @@ class Main
 	@change_page:(navi_page)->
 		@next_page = navi_page.route
 		if @current_page
-			@remove_current_page =>
+			if navi_page.modal
 				@add_next_page(navi_page)
+			else
+				@remove_current_page =>
+					@add_next_page(navi_page)
+				
 		else
 			@add_next_page(navi_page)
 
@@ -70,7 +82,6 @@ class Main
 
 
 	@get_page:(route)->
-		console.log "get page"
 		obj = null
 		for e in routes
 			if(route.match(e.regexp))

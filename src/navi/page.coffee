@@ -8,12 +8,17 @@ class Page
 		@target = object.target
 		@route = object.route
 		@object = object.page
+		@modal = object.modal
 
 	intro:(params, callback)=>
 
 		@animating_in = true
 		@el = @object.render(params)
-		$(@target).html @el
+		if @modal
+			$(@target).append @el
+		else
+			$(@target).html @el
+			
 		@object.intro =>
 			callback()
 			if @removing == false
