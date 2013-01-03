@@ -1,8 +1,23 @@
 {
-  "name": "navi",
-  "version": "0.1.1",
-  "main": "./lib/navi.js",
-  "dependencies": {
-
-  }
+	"name": "navi",
+	"version": "0.1.1",
+	"description": "Page navigation library",
+	"main": "./lib/navi.js",
+	"keywords": [
+		"navi"
+	],
+	"homepage": "https://github.com/giuliandrimba/navi",
+	"bugs": "https://github.com/giuliandrimba/navi/issues",
+	"author": {
+		"name": "Giulian Drimba",
+		"email": "giuliandrimba@gmail.com",
+		"url": "http://codeman.co"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:giuliandrimba/navi.git"
+	},
+	"licenses": [{
+		"type": "MIT"
+	}]
 }
