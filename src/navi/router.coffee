@@ -1,4 +1,4 @@
-class HashNav
+class navi.Router
 
 	constructor:->
 

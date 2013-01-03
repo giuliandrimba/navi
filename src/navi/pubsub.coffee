@@ -1,4 +1,4 @@
-class PubSub
+class navi.PubSub
   
   listeners = []
 

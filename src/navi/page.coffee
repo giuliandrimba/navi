@@ -1,4 +1,4 @@
-class Page
+class navi.Page
 
 	removing:false
 	animating_in:false

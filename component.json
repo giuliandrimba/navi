@@ -1,0 +1,5 @@
+{
+  "name": "navi",
+  "version": "0.1.1",
+  "main": "./lib/navi.js"
+}

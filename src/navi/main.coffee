@@ -1,8 +1,8 @@
 #<< navi/pubsub
 #<< navi/page
-#<< navi/hash_nav
+#<< navi/router
 
-class Main
+class navi.Main
 
 	routes = []
 	@events = new navi.PubSub
@@ -92,12 +92,12 @@ class Main
 
 if typeof define == 'function' && define.amd
 	define( =>
-		window.page = new navi.HashNav()
+		window.page = new navi.Router()
 
 		return navi.Main
 	)
 else if 'undefined' == typeof module
-	window.page = new navi.HashNav()
+	window.page = new navi.Router()
 			
 	window.Navi = navi.Main
 else
