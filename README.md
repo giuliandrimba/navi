@@ -1,5 +1,7 @@
 # Navi
 
+Router and page navigation library.
+
 ## Introduction
 
 https://github.com/giuliandrimba/navi/wiki/Introduction
