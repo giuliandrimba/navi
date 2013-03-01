@@ -151,8 +151,13 @@ function onRouteChange(params)
 }
 ```
 
-## Examples
-_(Coming soon)_
+## Example
+Application example in the "examples" folder
+
+## Sites made with Navi
+
+* URL: http://www.vocenosuperbowl.com.br/
+* URL: http://www.concursoallianz.com.br/
 
 ## License
 Copyright (c) 2012 Giulian Drimba  
