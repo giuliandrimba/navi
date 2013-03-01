@@ -14,9 +14,9 @@ WorkDetail = function()
 			callback()
 	}
 
-	this.render = function(id)
+	this.render = function(id, id2, id3)
 	{
 		console.log("Render Work Detail");
-		return "<p>Work"+id+"</p>";
+		return "<p>Work "+id3+"</p>";
 	}
 }

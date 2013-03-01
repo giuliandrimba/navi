@@ -15,16 +15,15 @@ class navi.Router
 	format_hash:(hash)->
 		rgx = /(:[^\/]*)/g
 		str = hash.replace(/(:[^\/]*)/g,"(.*)")
-		rgx = new RegExp(str, "g")
+		rgx = new RegExp(str)
 		return rgx
 
 	change_route:(hash)->
 		hash = hash.substring(2)
 		for route in @states
 			if route.regexp.test(hash)
-				if(hash.match(route.regexp)[0] is hash)
-					route.callback({params:hash})
-			# route.callback({params:hash}) if route.regexp.test(hash)
+				if((params = hash.match(route.regexp))[0] is hash)
+					route.callback({params:params.splice(1,4)})
 
 	init:->
 		@change_route window.location.hash.toString()

@@ -13,7 +13,7 @@ class navi.Page
 	intro:(params, callback)=>
 
 		@animating_in = true
-		@el = @object.render(params)
+		@el = @object.render.apply(null, params)
 		if @modal
 			$(@target).append @el
 		else

@@ -16,7 +16,6 @@ Work = function()
 
 	this.render = function(id)
 	{
-		console.log("Render Work");
 		return "<p>Work"+id+"</p>";
 	}
 }

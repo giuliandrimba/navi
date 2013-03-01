@@ -7,10 +7,10 @@
 	<title>Test</title>
 	<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-	<script type="text/javascript" src="/navi-example/navi.js"></script>
-	<script type="text/javascript" src="/navi-example/home_.js"></script>
-	<script type="text/javascript" src="/navi-example/work_.js"></script>
-	<script type="text/javascript" src="/navi-example/_workdetail.js"></script>
+	<script type="text/javascript" src="./navi.js"></script>
+	<script type="text/javascript" src="./javascripts/home.js"></script>
+	<script type="text/javascript" src="./javascripts/work.js"></script>
+	<script type="text/javascript" src="./javascripts/workdetail.js"></script>
 
 	<script type="text/javascript">
 
@@ -18,7 +18,7 @@
 		{
 			Navi.map("home",new Home,$("#content"));
 			Navi.map("work/:id/detalhe",new Work,$("#content"));
-			Navi.map("work/:id/detalhe/:id",new WorkDetail,$("#content"));
+			Navi.map("work/:id/detalhe/:id/:id",new WorkDetail,$("#content"));
 			Navi.map("work",new Work,$("#content"));
 			Navi.init();
 		})
@@ -29,7 +29,7 @@
 <body>
 
 	<a href="javascript:window.page('home')">Home</a>
-	<a href="javascript:window.page('work/1/detalhe/12')">Work</a>
+	<a href="javascript:window.page('work/1/detalhe/12/1')">Work</a>
 
 	<div id="content"></div>
 

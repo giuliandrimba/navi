@@ -7,10 +7,10 @@ toast 'src'
 	# bare: false
 	# packaging: true
 	# expose: ''
-	# minify: false
+	minify: false
 
 	# => HTTPFOLDER (optional), RELEASE / DEBUG (required)
 	httpfolder: ''
-	release: '../../../workspace/espn/espn-nfl2012/public/javascripts/vendors/navi//navi.js'
-	debug: '../../../workspace/espn/espn-nfl2012/public/javascripts/vendors/navi//navi.js'
+	release: 'lib/navi.js'
+	debug: 'example/navi.js'
 	# debug: 'lib/navi-debug.js'

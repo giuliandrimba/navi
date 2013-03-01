@@ -1,9 +1,12 @@
-# navi
+# Navi
 
-Page navigation library
+Navi is a router and navigation library.
 
 ## Documentation
-_(Coming soon)_
+
+### `map`
+
+> Sintax: `map(route, view, render_target)`
 
 ## Examples
 _(Coming soon)_
