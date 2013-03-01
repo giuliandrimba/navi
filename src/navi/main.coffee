@@ -78,7 +78,7 @@ class navi.Main
 	@add_next_page:(navi_page)->
 		@current_page = @get_page(@next_page)
 		@current_page.intro navi_page.params , => 
-			Main.events.trigger("page_change")
+			Main.events.trigger("page_change", navi_page.route)
 
 
 	@get_page:(route)->

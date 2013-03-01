@@ -108,7 +108,7 @@
       var _this = this;
       this.current_page = this.get_page(this.next_page);
       return this.current_page.intro(navi_page.params, function() {
-        return Main.events.trigger("page_change");
+        return Main.events.trigger("page_change", navi_page.route);
       });
     };
 
