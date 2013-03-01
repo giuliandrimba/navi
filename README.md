@@ -4,11 +4,11 @@ Navi is a router and page navigation library.
 
 ## How it works
 
-There are lots of Router librarys out there, that maps a route with a function, if you want to build a Single Page Application with them, all the render logic is up to you:
+There are lots of router librarys out there, that maps a route with a function, if you want to build a Single Page Application with them, all the render and page change logic is up to you:
 
 > change page > animate current page before it is removed > remove current page > adds new page > animate page when rendered
 
-Navi solves this problem handling the navigation logic for you.
+Navi solves this problem handling the page navigation logic for you.
 
 ## Documentation
 
