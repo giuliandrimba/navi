@@ -4,7 +4,37 @@ Navi is a router and page navigation library.
 
 ## How it works
 
+There are lots of Router librarys out there, that maps a route with a function, if you want to build a Single Page Application with them, all the render logic is up to you:
+
+> change page > animate current page before it is removed > remove current page > adds new page > animate page when rendered
+
+Navi solves this problem handling the navigation logic for you.
+
 ## Documentation
+
+## `go`
+Tells Navi to change the page to the specified route.
+
+> Sintax: `Navi.go(route)`
+
+### Parameters
+
+### __route__:
+
+String name of the route you want to go.
+
+> __Example:__
+
+> Suppose you map the pages like this:
+
+``` javascript
+Navi.map("work",work_view,"body");
+```
+> To go to the page "works", you would have to call the method `Navi.go`:
+
+``` javascript
+Navi.go("work");
+```
 
 ## `map`
 
