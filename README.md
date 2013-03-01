@@ -24,15 +24,13 @@ String pattern or regular expression to be matched against the requests. It can 
 "works/:id/:page" //"works/1/2", "works/2/3", etc
 ```
 
-##### __view__: 
+#### __view__: 
 
 This is the "view" object of the page, this object is responsible for rendering the page (eg: using templates) and applying intro and outro animations.
 
 A Navi view must have the following methods:
 
-``` javascript
-render()
-```
+#### render()
 > Must return the HTML of the page, that will be used by Navi to render the page.
 
 > __Example__:
@@ -41,6 +39,34 @@ render()
 render:function()
 {
   return "<p>This is the content of the page</p>"
+}
+```
+
+#### intro(callback)
+> Responsible for animating the introduction of the view. It is called after the `render` method, and has to call a callback when the animation is finished to notify Navi the the page has showed.
+
+> __Example__:
+
+``` javascript
+intro:function(callback)
+{
+  var main = $(".main_page");
+  main.css({opacity:0});
+  main.animate({opacity:1},1000, callback);
+}
+```
+
+#### outro(callback)
+> Responsible for animating the exit of the view. It is called before the Navi removes the page from the DOM. It has to call a callback when the animation is finished to notify Navi the the page can be removed.
+
+> __Example__:
+
+``` javascript
+intro:function(callback)
+{
+  var main = $(".main_page");
+  main.css({opacity:0});
+  main.animate({opacity:1},1000, callback);
 }
 ```
 
