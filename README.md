@@ -10,11 +10,11 @@ Navi is a router and page navigation library.
 
 Responsible for maping the request of a page with an javascript view.
 
-> Sintax: `Navi.map(route, view, render_target)`
+> Sintax: `Navi.map(route, view, render_target, optional)`
 
-#### Parameters
+### Parameters
 
-##### __route__: 
+### __route__: 
 
 String pattern or regular expression to be matched against the requests. It can accept optional parameters preceded by " : ".
 > __Examples:__
@@ -26,13 +26,13 @@ String pattern or regular expression to be matched against the requests. It can 
 "works/:id/:page" //"works/1/2", "works/2/3", etc
 ```
 
-#### __view__: 
+### __view__: 
 
 This is the "view" object of the page, this object is responsible for rendering the page (eg: using templates) and applying intro and outro animations.
 
 A Navi view must have the following methods:
 
-#### render()
+##### render()
 Must return the HTML of the page, that will be used by Navi to render the page.
 
 > __Example__:
@@ -59,7 +59,7 @@ render:function(id)
 ```
 
 
-#### intro(callback)
+##### intro(callback)
 Responsible for animating the introduction of the view. It is called after the `render` method, and has to call a callback when the animation is finished to notify Navi the the page has showed.
 
 > __Example__:
@@ -73,7 +73,7 @@ intro:function(callback)
 }
 ```
 
-#### outro(callback)
+##### outro(callback)
 Responsible for animating the exit of the view. It is called before the Navi removes the page from the DOM. It has to call a callback when the animation is finished to notify Navi the the page can be removed.
 
 > __Example__:
@@ -87,13 +87,26 @@ outro:function(callback)
 }
 ```
 
-#### __render_target__: 
+### __render_target__: 
 
 This is the element at which the view will be renderer, it accepts any css selector.
 
 > __Example__:
 ``` javascript
 Navi.map("home",home_view,".home_content div")
+```
+
+Navi will insert the `home_view` `render` method at the element `$(".home_content div")`
+
+### optional: 
+
+Navi.map accepts some optional parameters:
+
+`{modal:true}`: Sets the page as modal, it will be rendered above the current page, and the URL will no change.
+
+> __Example__:
+``` javascript
+Navi.map("home",home_view,".home_content div",{modal:true});
 ```
 
 Navi will insert the `home_view` `render` method at the element `$(".home_content div")`
@@ -106,6 +119,37 @@ Initializes the Navi library.
 
 It should be called after all the Navi mappings.
 
+### Events
+
+##### route_change: 
+
+Event fired when the URL changes. It passes an object with the name of the page to the handler.
+
+> Example:
+
+``` javascript
+Navi.bind("route_change", onRouteChange);
+
+function onRouteChange(params)
+{
+  console.log("new page is ", params.page);
+}
+```
+
+##### page_change: 
+
+Event fired when the page finished its introduction. It passes an object with the name of the page to the handler.
+
+> Example:
+
+``` javascript
+Navi.bind("page_change", onPageChange);
+
+function onRouteChange(params)
+{
+  console.log("new page is ", params.page);
+}
+```
 
 ## Examples
 _(Coming soon)_
