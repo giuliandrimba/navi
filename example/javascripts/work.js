@@ -21,6 +21,6 @@ Work = function()
 
 	this.render = function(id)
 	{
-		return "<p>Work"+id+"</p>";
+		return "<p>WORK</p><br /><div id='content'></div>";
 	}
 }

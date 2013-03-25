@@ -13,7 +13,13 @@ class navi.Page extends navi.PubSub
 		@modal = object.modal
 
 	load:(callback)=>
-		@object.load callback
+		
+		if @object.load
+			@object.load callback
+			return
+		else
+			callback()
+			return
 
 	intro:(params, callback)=>
 

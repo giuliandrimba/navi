@@ -26,7 +26,11 @@
     }
 
     Page.prototype.load = function(callback) {
-      return this.object.load(callback);
+      if (this.object.load) {
+        this.object.load(callback);
+      } else {
+        callback();
+      }
     };
 
     Page.prototype.intro = function(params, callback) {

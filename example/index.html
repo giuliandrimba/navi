@@ -17,7 +17,7 @@
 		$(document).ready(function()
 		{
 			Navi.map("home",new Home,$("#content"));
-			Navi.map("work/:id/detalhe",new Work,$("#content"));
+			Navi.map("work",new Work,$("#content"));
 			Navi.map("work/:id/detalhe/:id/:id",new WorkDetail,$("#content"));
 			Navi.map("work",new Work,$("#content"));
 			Navi.init();
@@ -29,7 +29,8 @@
 <body>
 
 	<a href="javascript:window.page('home')">Home</a>
-	<a href="javascript:window.page('work/1/detalhe/12/1')">Work</a>
+	<a href="javascript:window.page('work')">Work</a>
+	<a href="javascript:window.page('work/1/detalhe/12/1')">Work Details</a>
 
 	<div id="content"></div>
 
