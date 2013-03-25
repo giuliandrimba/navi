@@ -9,15 +9,26 @@ class navi.Main
 
 	current_page = null
 	next_page = null
+	old_page = null
 	locked : false
+
+	#options
+	modal:false
+	target_route:null
+	target_dom:null
+
+	dependencies:[]
 
 	constructor:->
 		
 
-	@map:(hash,object,el_target,options)->
-		modal = false
-		modal = true if options?.modal
-		navi_page = new navi.Page({route:hash,page:object,target:el_target, params:null, modal:modal})
+	@map:(hash, object, options)->
+		modal = options?.modal
+		target_route = options?.route
+		target_dom = options?.dom 
+
+		navi_page = new navi.Page({route:hash,page:object,target_dom:target_dom, target_route:target_route, params:null, modal:modal})
+
 		routes.push(navi_page)
 
 		page_api = window.page hash,(ctx)=>
@@ -54,36 +65,74 @@ class navi.Main
 		Main.events.trigger("route_change",{page:navi_page.route})
 		@change_page(navi_page)
 
+	@next_page_dependency:(page)=>
+		return @get_page(page.dependency)
+
+
 	@change_page:(navi_page)->
+
 		@next_page = navi_page.route
-		if @current_page
-			if navi_page.modal
-				@add_next_page(navi_page)
-			else
+		next_page_obj = @get_page(@next_page)
+
+		if @current_page and !navi_page.modal
+
+			if @get_page(next_page_obj.dependency) isnt @current_page
 				@remove_current_page =>
 					@add_next_page(navi_page)
-				
+			else
+				@add_next_page(navi_page)
 		else
 			@add_next_page(navi_page)
 
-
 	@remove_current_page:(callback)->
+
 		if @current_page.animating_in
 			if @current_page.animating_out is false
+				@current_page.active = false
 				@current_page.outro(callback)
 		else
 			if @current_page.animating_out is false
+				@current_page.active = false
 				@current_page.outro(callback)
 
-	@add_next_page:(navi_page)->
+	@add_next_page:(navi_page)=>
+		@old_page = @current_page if @current_page
 		@current_page = @get_page(@next_page)
-		@current_page.load =>
-			@current_page.intro navi_page.params , => 
-				Main.events.trigger("page_change", navi_page.route)
+
+		@dependencies = []
+
+		unless @current_page.active
+			@add_dependencies @current_page, =>
+				@current_page.load =>
+					@current_page.intro navi_page.params , => 
+						Main.events.trigger("page_change", navi_page.route)
+		else
+			Main.events.trigger("page_change", navi_page.route)
+
+
+	@add_dependencies:(navi_page, callback)=>
+
+		if navi_page.dependency and @get_page(navi_page.dependency) isnt @old_page
+			@dependencies.push @get_page(navi_page.dependency)
+			@add_dependencies @get_page(navi_page.dependency), callback
+		else
+			@load_dependencies(callback)
+
+	@load_dependencies:(callback)->
+
+		if @dependencies.length
+			page = @dependencies.pop()
+			page.load =>
+				page.intro page.params , => 
+					page.active = true
+					@load_dependencies(callback)
+		else
+			callback()
 
 
 	@get_page:(route)->
 		obj = null
+		return obj if !route
 		for e in routes
 			if(route.match(e.regexp))
 				for rxp in route.match(e.regexp)

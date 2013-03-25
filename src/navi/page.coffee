@@ -5,15 +5,19 @@ class navi.Page extends navi.PubSub
 	removing:false
 	animating_in:false
 	animating_out:false
+	active:false
+
+	dependency:{}
 
 	constructor:(object)->
-		@target = object.target
-		@route = object.route
-		@object = object.page
-		@modal = object.modal
+		@target_dom = object?.target_dom
+		@route = object?.route
+		@object = object?.page
+		@modal = object?.modal
+		@dependency = object?.target_route
 
 	load:(callback)=>
-		
+
 		if @object.load
 			@object.load callback
 			return
@@ -26,9 +30,9 @@ class navi.Page extends navi.PubSub
 		@animating_in = true
 		@el = @object.render.apply(null, params)
 		if @modal
-			$(@target).append @el
+			$(@target_dom).append @el
 		else
-			$(@target).html @el
+			$(@target_dom).html @el
 			
 		@object.intro =>
 			callback()
@@ -41,4 +45,5 @@ class navi.Page extends navi.PubSub
 		@animating_in = false
 		@object.outro =>
 			@animating_out = false
+			$(@target_dom).empty()
 			callback()

@@ -16,10 +16,9 @@
 
 		$(document).ready(function()
 		{
-			Navi.map("home",new Home,$("#content"));
-			Navi.map("work",new Work,$("#content"));
-			Navi.map("work/:id/detalhe/:id/:id",new WorkDetail,$("#content"));
-			Navi.map("work",new Work,$("#content"));
+			Navi.map("home",new Home, {dom:"#content"});
+			Navi.map("work",new Work, {dom:"#content"});
+			Navi.map("work/:id/detalhe/:id/:id",new WorkDetail, {dom:"#work_content", route:"work"});
 			Navi.init();
 		})
 

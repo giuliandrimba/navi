@@ -2,7 +2,7 @@
   var _this = this;
 
   navi.Main = (function() {
-    var current_page, next_page, routes;
+    var current_page, next_page, old_page, routes;
 
     routes = [];
 
@@ -12,21 +12,31 @@
 
     next_page = null;
 
+    old_page = null;
+
     Main.prototype.locked = false;
+
+    Main.prototype.modal = false;
+
+    Main.prototype.target_route = null;
+
+    Main.prototype.target_dom = null;
+
+    Main.prototype.dependencies = [];
 
     function Main() {}
 
-    Main.map = function(hash, object, el_target, options) {
-      var modal, navi_page, page_api,
+    Main.map = function(hash, object, options) {
+      var modal, navi_page, page_api, target_dom, target_route,
         _this = this;
-      modal = false;
-      if (options != null ? options.modal : void 0) {
-        modal = true;
-      }
+      modal = options != null ? options.modal : void 0;
+      target_route = options != null ? options.route : void 0;
+      target_dom = options != null ? options.dom : void 0;
       navi_page = new navi.Page({
         route: hash,
         page: object,
-        target: el_target,
+        target_dom: target_dom,
+        target_route: target_route,
         params: null,
         modal: modal
       });
@@ -76,16 +86,22 @@
       return Main.change_page(navi_page);
     };
 
+    Main.next_page_dependency = function(page) {
+      return Main.get_page(page.dependency);
+    };
+
     Main.change_page = function(navi_page) {
-      var _this = this;
+      var next_page_obj,
+        _this = this;
       this.next_page = navi_page.route;
-      if (this.current_page) {
-        if (navi_page.modal) {
-          return this.add_next_page(navi_page);
-        } else {
+      next_page_obj = this.get_page(this.next_page);
+      if (this.current_page && !navi_page.modal) {
+        if (this.get_page(next_page_obj.dependency) !== this.current_page) {
           return this.remove_current_page(function() {
             return _this.add_next_page(navi_page);
           });
+        } else {
+          return this.add_next_page(navi_page);
         }
       } else {
         return this.add_next_page(navi_page);
@@ -95,28 +111,67 @@
     Main.remove_current_page = function(callback) {
       if (this.current_page.animating_in) {
         if (this.current_page.animating_out === false) {
+          this.current_page.active = false;
           return this.current_page.outro(callback);
         }
       } else {
         if (this.current_page.animating_out === false) {
+          this.current_page.active = false;
           return this.current_page.outro(callback);
         }
       }
     };
 
     Main.add_next_page = function(navi_page) {
-      var _this = this;
-      this.current_page = this.get_page(this.next_page);
-      return this.current_page.load(function() {
-        return _this.current_page.intro(navi_page.params, function() {
-          return Main.events.trigger("page_change", navi_page.route);
+      if (Main.current_page) {
+        Main.old_page = Main.current_page;
+      }
+      Main.current_page = Main.get_page(Main.next_page);
+      Main.dependencies = [];
+      if (!Main.current_page.active) {
+        return Main.add_dependencies(Main.current_page, function() {
+          return Main.current_page.load(function() {
+            return Main.current_page.intro(navi_page.params, function() {
+              return Main.events.trigger("page_change", navi_page.route);
+            });
+          });
         });
-      });
+      } else {
+        return Main.events.trigger("page_change", navi_page.route);
+      }
+    };
+
+    Main.add_dependencies = function(navi_page, callback) {
+      if (navi_page.dependency && Main.get_page(navi_page.dependency) !== Main.old_page) {
+        Main.dependencies.push(Main.get_page(navi_page.dependency));
+        return Main.add_dependencies(Main.get_page(navi_page.dependency), callback);
+      } else {
+        return Main.load_dependencies(callback);
+      }
+    };
+
+    Main.load_dependencies = function(callback) {
+      var page,
+        _this = this;
+      if (this.dependencies.length) {
+        page = this.dependencies.pop();
+        return page.load(function() {
+          return page.intro(page.params, function() {
+            page.active = true;
+            return _this.load_dependencies(callback);
+          });
+        });
+      } else {
+        return callback();
+      }
     };
 
     Main.get_page = function(route) {
       var e, obj, rxp, _i, _j, _len, _len1, _ref;
       obj = null;
+      if (!route) {
+        return obj;
+      }
       for (_i = 0, _len = routes.length; _i < _len; _i++) {
         e = routes[_i];
         if (route.match(e.regexp)) {
