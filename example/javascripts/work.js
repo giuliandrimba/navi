@@ -7,6 +7,11 @@ Work = function()
 			callback()
 	}
 
+	this.load = function(callback)
+	{
+		callback();
+	}
+
 	this.outro = function(callback)
 	{
 		console.log("Outro Work");

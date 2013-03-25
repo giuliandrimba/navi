@@ -1,4 +1,6 @@
-class navi.Page
+#<< navi/pubsub
+
+class navi.Page extends navi.PubSub
 
 	removing:false
 	animating_in:false
@@ -9,6 +11,9 @@ class navi.Page
 		@route = object.route
 		@object = object.page
 		@modal = object.modal
+
+	load:(callback)=>
+		@object.load callback
 
 	intro:(params, callback)=>
 

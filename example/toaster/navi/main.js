@@ -107,8 +107,10 @@
     Main.add_next_page = function(navi_page) {
       var _this = this;
       this.current_page = this.get_page(this.next_page);
-      return this.current_page.intro(navi_page.params, function() {
-        return Main.events.trigger("page_change", navi_page.route);
+      return this.current_page.load(function() {
+        return _this.current_page.intro(navi_page.params, function() {
+          return Main.events.trigger("page_change", navi_page.route);
+        });
       });
     };
 

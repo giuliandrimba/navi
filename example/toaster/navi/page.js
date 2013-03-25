@@ -1,7 +1,11 @@
 (function() {
-  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  navi.Page = (function() {
+  navi.Page = (function(_super) {
+
+    __extends(Page, _super);
 
     Page.prototype.removing = false;
 
@@ -13,11 +17,17 @@
       this.outro = __bind(this.outro, this);
 
       this.intro = __bind(this.intro, this);
+
+      this.load = __bind(this.load, this);
       this.target = object.target;
       this.route = object.route;
       this.object = object.page;
       this.modal = object.modal;
     }
+
+    Page.prototype.load = function(callback) {
+      return this.object.load(callback);
+    };
 
     Page.prototype.intro = function(params, callback) {
       var _this = this;
@@ -49,6 +59,6 @@
 
     return Page;
 
-  })();
+  })(navi.PubSub);
 
 }).call(this);

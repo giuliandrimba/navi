@@ -7,6 +7,11 @@ WorkDetail = function()
 			callback()
 	}
 
+	this.load = function(callback)
+	{
+		callback();
+	}
+
 	this.outro = function(callback)
 	{
 		console.log("Outro Work Detail");
@@ -17,6 +22,6 @@ WorkDetail = function()
 	this.render = function(id, id2, id3)
 	{
 		console.log("Render Work Detail");
-		return "<p>Work "+id3+"</p>";
+		return "<p>Work "+id+"</p>";
 	}
 }

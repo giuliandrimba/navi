@@ -8,6 +8,11 @@ Home = function()
 			callback()
 	}
 
+	this.load = function(callback)
+	{
+		callback();
+	}
+
 	this.outro = function(callback)
 	{
 		console.log("outro home");
@@ -19,6 +24,6 @@ Home = function()
 	this.render = function()
 	{
 		console.log("render home");
-		return "<p>Home</p>";
+		return "<p>Home</p><br /><div id='content'></div>";
 	}
 }
