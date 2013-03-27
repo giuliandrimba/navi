@@ -130,10 +130,8 @@
       Main.dependencies = [];
       if (!Main.current_page.active) {
         return Main.add_dependencies(Main.current_page, function() {
-          return Main.current_page.load(function() {
-            return Main.current_page.intro(navi_page.params, function() {
-              return Main.events.trigger("page_change", navi_page.route);
-            });
+          return Main.current_page.intro(navi_page.params, function() {
+            return Main.events.trigger("page_change", navi_page.route);
           });
         });
       } else {
@@ -155,11 +153,9 @@
         _this = this;
       if (this.dependencies.length) {
         page = this.dependencies.pop();
-        return page.load(function() {
-          return page.intro(page.params, function() {
-            page.active = true;
-            return _this.load_dependencies(callback);
-          });
+        return page.intro(page.params, function() {
+          page.active = true;
+          return _this.load_dependencies(callback);
         });
       } else {
         return callback();

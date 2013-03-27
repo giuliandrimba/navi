@@ -103,9 +103,8 @@ class navi.Main
 
 		unless @current_page.active
 			@add_dependencies @current_page, =>
-				@current_page.load =>
-					@current_page.intro navi_page.params , => 
-						Main.events.trigger("page_change", navi_page.route)
+				@current_page.intro navi_page.params , => 
+					Main.events.trigger("page_change", navi_page.route)
 		else
 			Main.events.trigger("page_change", navi_page.route)
 
@@ -122,10 +121,9 @@ class navi.Main
 
 		if @dependencies.length
 			page = @dependencies.pop()
-			page.load =>
-				page.intro page.params , => 
-					page.active = true
-					@load_dependencies(callback)
+			page.intro page.params , => 
+				page.active = true
+				@load_dependencies(callback)
 		else
 			callback()
 

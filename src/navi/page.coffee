@@ -33,11 +33,12 @@ class navi.Page extends navi.PubSub
 			$(@target_dom).append @el
 		else
 			$(@target_dom).html @el
-			
-		@object.intro =>
-			callback()
-			if @removing == false
-				@animating_in = false
+
+		@load =>
+			@object.intro =>
+				callback()
+				if @removing == false
+					@animating_in = false
 
 	outro:(callback)=>
 		@animating_out = true

@@ -47,11 +47,13 @@
       } else {
         $(this.target_dom).html(this.el);
       }
-      return this.object.intro(function() {
-        callback();
-        if (_this.removing === false) {
-          return _this.animating_in = false;
-        }
+      return this.load(function() {
+        return _this.object.intro(function() {
+          callback();
+          if (_this.removing === false) {
+            return _this.animating_in = false;
+          }
+        });
       });
     };
 
