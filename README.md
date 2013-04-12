@@ -16,6 +16,7 @@ https://github.com/giuliandrimba/navi/tree/master/example
 
 ## Sites made with Navi
 
+* URL: http://studiofabrica105.com.br/
 * URL: http://www.vocenosuperbowl.com.br/
 * URL: http://www.concursoallianz.com.br/
 
