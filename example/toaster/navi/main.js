@@ -109,16 +109,9 @@
     };
 
     Main.remove_current_page = function(callback) {
-      if (this.current_page.animating_in) {
-        if (this.current_page.animating_out === false) {
-          this.current_page.active = false;
-          return this.current_page.outro(callback);
-        }
-      } else {
-        if (this.current_page.animating_out === false) {
-          this.current_page.active = false;
-          return this.current_page.outro(callback);
-        }
+      if (this.current_page.animating_out === false) {
+        this.current_page.active = false;
+        return this.current_page.outro(callback);
       }
     };
 
@@ -131,6 +124,7 @@
       if (!Main.current_page.active) {
         return Main.add_dependencies(Main.current_page, function() {
           return Main.current_page.intro(navi_page.params, function() {
+            Main.current_page.active = true;
             return Main.events.trigger("page_change", navi_page.route);
           });
         });

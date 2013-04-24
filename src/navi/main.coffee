@@ -86,14 +86,9 @@ class navi.Main
 
 	@remove_current_page:(callback)->
 
-		if @current_page.animating_in
-			if @current_page.animating_out is false
-				@current_page.active = false
-				@current_page.outro(callback)
-		else
-			if @current_page.animating_out is false
-				@current_page.active = false
-				@current_page.outro(callback)
+		if @current_page.animating_out is false
+			@current_page.active = false
+			@current_page.outro(callback)
 
 	@add_next_page:(navi_page)=>
 		@old_page = @current_page if @current_page
@@ -104,6 +99,7 @@ class navi.Main
 		unless @current_page.active
 			@add_dependencies @current_page, =>
 				@current_page.intro navi_page.params , => 
+					@current_page.active = true
 					Main.events.trigger("page_change", navi_page.route)
 		else
 			Main.events.trigger("page_change", navi_page.route)
