@@ -62,6 +62,7 @@ class navi.Main
 			window.page page_name
 
 	@process_hash_change:(navi_page)=>
+
 		Main.events.trigger("route_change",{page:navi_page.route})
 		@change_page(navi_page)
 
@@ -72,11 +73,13 @@ class navi.Main
 	@change_page:(navi_page)->
 
 		@next_page = navi_page.route
+
 		next_page_obj = @get_page(@next_page)
 
 		if @current_page and !navi_page.modal
 
 			if @get_page(next_page_obj.dependency) isnt @current_page
+
 				@remove_current_page =>
 					@add_next_page(navi_page)
 			else
@@ -86,9 +89,9 @@ class navi.Main
 
 	@remove_current_page:(callback)->
 
-		if @current_page.animating_out is false
-			@current_page.active = false
-			@current_page.outro(callback)
+		# if @current_page.animating_out is false
+		@current_page.active = false
+		@current_page.outro(callback)
 
 	@add_next_page:(navi_page)=>
 		@old_page = @current_page if @current_page
@@ -97,6 +100,7 @@ class navi.Main
 		@dependencies = []
 
 		unless @current_page.active
+
 			@add_dependencies @current_page, =>
 				@current_page.intro navi_page.params , => 
 					@current_page.active = true
@@ -116,9 +120,14 @@ class navi.Main
 	@load_dependencies:(callback)->
 
 		if @dependencies.length
+
 			page = @dependencies.pop()
-			page.intro page.params , => 
-				page.active = true
+
+			unless page.active
+				page.intro page.params , => 
+					page.active = true
+					@load_dependencies(callback)
+			else
 				@load_dependencies(callback)
 		else
 			callback()

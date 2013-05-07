@@ -11,6 +11,6 @@ toast 'src'
 
 	# => HTTPFOLDER (optional), RELEASE / DEBUG (required)
 	httpfolder: ''
-	release: '../../work/rumba/citroen/citroen_ds4_hotsite/public/app/javascripts/vendors/navi/navi.js'
+	release: '../../work/rumba/citroen/citroen_ds4_hotsite/app/javascripts/vendors/navi/navi.js'
 	debug: 'example/navi.js'
 	# debug: 'lib/navi-debug.js'
