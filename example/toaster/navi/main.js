@@ -80,6 +80,7 @@
     };
 
     Main.process_hash_change = function(navi_page) {
+      console.log("process_hash_change");
       Main.events.trigger("route_change", {
         page: navi_page.route
       });

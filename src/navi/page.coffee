@@ -28,7 +28,7 @@ class navi.Page extends navi.PubSub
 	intro:(params, callback)=>
 
 		@animating_in = true
-		@el = @object.render.apply(null, params)
+		@el = @object.render(params)
 		if @modal
 			$(@target_dom).append @el
 		else

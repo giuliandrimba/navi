@@ -41,7 +41,7 @@
     Page.prototype.intro = function(params, callback) {
       var _this = this;
       this.animating_in = true;
-      this.el = this.object.render.apply(null, params);
+      this.el = this.object.render(params);
       if (this.modal) {
         $(this.target_dom).append(this.el);
       } else {

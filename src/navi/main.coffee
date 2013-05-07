@@ -62,6 +62,7 @@ class navi.Main
 			window.page page_name
 
 	@process_hash_change:(navi_page)=>
+		console.log "process_hash_change"
 		Main.events.trigger("route_change",{page:navi_page.route})
 		@change_page(navi_page)
 
