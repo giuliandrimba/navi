@@ -83,7 +83,7 @@
     };
 
     Main.process_hash_change = function(navi_page) {
-      Main.events.trigger("route_change", {
+      Main.events.trigger("route:change", {
         page: navi_page.route
       });
       return Main.change_page(navi_page);
@@ -141,11 +141,11 @@
         return Main.add_dependencies(Main.current_page, function() {
           return Main.current_page.intro(navi_page.params, function() {
             Main.current_page.active = true;
-            return Main.events.trigger("page_change", navi_page.route);
+            return Main.events.trigger("page:change", navi_page.route);
           });
         });
       } else {
-        return Main.events.trigger("page_change", navi_page.route);
+        return Main.events.trigger("page:change", navi_page.route);
       }
     };
 

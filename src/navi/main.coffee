@@ -64,7 +64,7 @@ class navi.Main
 			window.page page_name
 
 	@process_hash_change:(navi_page)=>
-		Main.events.trigger("route_change",{page:navi_page.route})
+		Main.events.trigger("route:change",{page:navi_page.route})
 		@change_page(navi_page)
 
 	@next_page_dependency:(page)=>
@@ -114,9 +114,9 @@ class navi.Main
 			@add_dependencies @current_page, =>
 				@current_page.intro navi_page.params , => 
 					@current_page.active = true
-					Main.events.trigger("page_change", navi_page.route)
+					Main.events.trigger("page:change", navi_page.route)
 		else
-			Main.events.trigger("page_change", navi_page.route)
+			Main.events.trigger("page:change", navi_page.route)
 
 
 	@add_dependencies:(navi_page, callback)=>
