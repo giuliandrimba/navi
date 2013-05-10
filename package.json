@@ -1,7 +1,7 @@
 {
   "name": "navi",
   "description": "page navigation library",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "homepage": "https://github.com/giuliandrimba/navi",
   "author": {
     "name": "Giulian Drimba",
@@ -34,7 +34,7 @@
     "name": "giuliandrimba",
     "email": "giuliandrimba@hotmail.com"
   },
-  "_id": "navi@0.1.0",
+  "_id": "navi@0.3.0",
   "optionalDependencies": {},
   "_engineSupported": true,
   "_npmVersion": "1.1.16",

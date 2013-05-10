@@ -1,4 +1,4 @@
-# Navi
+# Navi V0.3.0
 
 Router and page navigation library.
 
