@@ -88,9 +88,18 @@ class navi.Main
 
 	@remove_current_page:(callback)->
 
-		# if @current_page.animating_out is false
 		@current_page.active = false
-		@current_page.outro(callback)
+		@current_page.outro =>
+			@remove_dependencies @current_page, callback
+
+	@remove_dependencies:(page, callback)->
+
+		if page.dependency and @get_page(@next_page) isnt @get_page(page.dependency)
+			@get_page(page.dependency).outro =>
+				@get_page(page.dependency).active = false
+				@remove_dependencies @get_page(page.dependency), callback
+		else
+			callback()
 
 	@add_next_page:(navi_page)=>
 		@old_page = @current_page if @current_page
@@ -119,7 +128,7 @@ class navi.Main
 	@load_dependencies:(callback)->
 
 		if @dependencies.length
-
+			
 			page = @dependencies.pop()
 
 			unless page.active

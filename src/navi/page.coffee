@@ -35,6 +35,8 @@ class navi.Page extends navi.PubSub
 		else
 			$(@target_dom).html @el
 
+		# console.log @object
+
 		@load =>
 			@object.intro =>
 				callback()

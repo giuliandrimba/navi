@@ -109,8 +109,23 @@
     };
 
     Main.remove_current_page = function(callback) {
+      var _this = this;
       this.current_page.active = false;
-      return this.current_page.outro(callback);
+      return this.current_page.outro(function() {
+        return _this.remove_dependencies(_this.current_page, callback);
+      });
+    };
+
+    Main.remove_dependencies = function(page, callback) {
+      var _this = this;
+      if (page.dependency && this.get_page(this.next_page) !== this.get_page(page.dependency)) {
+        return this.get_page(page.dependency).outro(function() {
+          _this.get_page(page.dependency).active = false;
+          return _this.remove_dependencies(_this.get_page(page.dependency), callback);
+        });
+      } else {
+        return callback();
+      }
     };
 
     Main.add_next_page = function(navi_page) {
