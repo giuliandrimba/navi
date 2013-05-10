@@ -69,6 +69,9 @@
 
     Main.go = function(page_name) {
       var page;
+      if (this.current_page.animating_in || this.current_page.animating_out) {
+        return;
+      }
       page = this.get_page(page_name);
       if (page.modal && !this.locked) {
         this.process_hash_change(page);

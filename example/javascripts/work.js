@@ -15,8 +15,12 @@ Work = function()
 	this.outro = function(callback)
 	{
 		console.log("Outro Work");
-		if(callback)
-			callback()
+		setTimeout(function()
+		{
+			console.log("finising outro work");
+			if(callback)
+				callback()
+		}, 1000)
 	}
 
 	this.render = function(id)

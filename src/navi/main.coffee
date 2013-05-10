@@ -52,6 +52,8 @@ class navi.Main
 
 	@go:(page_name)->
 
+		return if @current_page.animating_in or @current_page.animating_out
+
 		page = @get_page(page_name)
 
 		if page.modal and !@locked

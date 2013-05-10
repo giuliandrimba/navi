@@ -12,8 +12,12 @@ Home = function()
 	{
 		console.log("outro home");
 
-		if(callback)
-			callback()
+		setTimeout(function()
+		{
+			console.log("finising outro home");
+			if(callback)
+				callback()
+		}, 1000)
 	}
 
 	this.render = function()

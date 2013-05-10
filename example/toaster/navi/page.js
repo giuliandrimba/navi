@@ -50,9 +50,7 @@
       return this.load(function() {
         return _this.object.intro(function() {
           callback();
-          if (_this.removing === false) {
-            return _this.animating_in = false;
-          }
+          return _this.animating_in = false;
         });
       });
     };
