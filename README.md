@@ -16,9 +16,9 @@ https://github.com/giuliandrimba/navi/tree/master/example
 
 ## Sites made with Navi
 
-* URL: http://studiofabrica105.com.br/
-* URL: http://www.vocenosuperbowl.com.br/
-* URL: http://www.concursoallianz.com.br/
+* Studiofabrica105: http://studiofabrica105.com.br/
+* ESPN "Você no Superbowl": http://www.vocenosuperbowl.com.br/
+* ESPN "Concurso Allianz": http://www.concursoallianz.com.br/
 
 ## License
 Copyright (c) 2012 Giulian Drimba  
