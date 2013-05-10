@@ -80,7 +80,6 @@
     };
 
     Main.process_hash_change = function(navi_page) {
-      console.log("process_hash_change");
       Main.events.trigger("route_change", {
         page: navi_page.route
       });
@@ -110,17 +109,8 @@
     };
 
     Main.remove_current_page = function(callback) {
-      if (this.current_page.animating_in) {
-        if (this.current_page.animating_out === false) {
-          this.current_page.active = false;
-          return this.current_page.outro(callback);
-        }
-      } else {
-        if (this.current_page.animating_out === false) {
-          this.current_page.active = false;
-          return this.current_page.outro(callback);
-        }
-      }
+      this.current_page.active = false;
+      return this.current_page.outro(callback);
     };
 
     Main.add_next_page = function(navi_page) {
@@ -132,6 +122,7 @@
       if (!Main.current_page.active) {
         return Main.add_dependencies(Main.current_page, function() {
           return Main.current_page.intro(navi_page.params, function() {
+            Main.current_page.active = true;
             return Main.events.trigger("page_change", navi_page.route);
           });
         });
@@ -154,10 +145,14 @@
         _this = this;
       if (this.dependencies.length) {
         page = this.dependencies.pop();
-        return page.intro(page.params, function() {
-          page.active = true;
-          return _this.load_dependencies(callback);
-        });
+        if (!page.active) {
+          return page.intro(page.params, function() {
+            page.active = true;
+            return _this.load_dependencies(callback);
+          });
+        } else {
+          return this.load_dependencies(callback);
+        }
       } else {
         return callback();
       }

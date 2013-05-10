@@ -11,6 +11,6 @@ toast 'src'
 
 	# => HTTPFOLDER (optional), RELEASE / DEBUG (required)
 	httpfolder: ''
-	release: 'lib/navi.js'
+	release: 'example/navi.min.js'
 	debug: 'example/navi.js'
 	# debug: 'lib/navi-debug.js'
