@@ -23,3 +23,7 @@ https://github.com/giuliandrimba/navi/tree/master/example
 ## License
 Copyright (c) 2012 Giulian Drimba  
 Licensed under the MIT license.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/giuliandrimba/navi/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
